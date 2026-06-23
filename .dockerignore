@@ -1,0 +1,16 @@
+.venv/
+.git/
+.cursor/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+data/
+.env
+docker/airflow/simple_auth_manager_passwords.json
+docs/
+tests/
+.streamlit/
+.pytest_cache/
+.ruff_cache/
+airflow.db

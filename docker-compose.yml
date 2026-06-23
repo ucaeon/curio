@@ -1,0 +1,33 @@
+services:
+  airflow:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    container_name: curio-airflow
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__CORE__EXECUTOR: "SequentialExecutor"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "airflow:admin"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: "/opt/airflow/config/simple_auth_manager_passwords.json"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "sqlite:////opt/airflow/airflow.db"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      AIRFLOW_HOME: "/opt/airflow"
+      CURIO_PROJECT_DIR: "/opt/curio"
+      PYTHONPATH: "/opt/curio"
+      UV_PROJECT_ENVIRONMENT: "/opt/airflow/.curio-venv"
+      PATH: "/usr/local/bin:/home/airflow/.local/bin:/usr/bin:/bin"
+    volumes:
+      - ./app:/opt/curio/app
+      - ./data:/opt/curio/data
+      - ./prompts:/opt/curio/prompts:ro
+      - ./pyproject.toml:/opt/curio/pyproject.toml:ro
+      - ./uv.lock:/opt/curio/uv.lock:ro
+      - ./README.md:/opt/curio/README.md:ro
+      - ./dags:/opt/airflow/dags
+    command: >
+      bash /opt/airflow/config/entrypoint.sh

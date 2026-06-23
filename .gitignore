@@ -1,0 +1,37 @@
+# 가상환경
+.venv/
+
+# 환경 변수
+.env
+
+# Python 빌드 캐시
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Ruff 캐시
+.ruff_cache/
+
+# pytest 캐시
+.pytest_cache/
+
+# macOS 시스템 파일
+.DS_Store
+
+# Cursor 참고 문서
+.cursor/
+
+# 데이터 파일 (Git 제외)
+data/
+
+# Airflow 로컬 인증
+docker/airflow/simple_auth_manager_passwords.json
+
+# Airflow 로컬 DB (호스트에 생성된 경우)
+airflow.db
+airflow.db-journal
+
+# 에이전트 실행 산출물 (로컬·DAG 생성)
+data/processed/agent/
